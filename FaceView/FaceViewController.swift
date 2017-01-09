@@ -9,10 +9,10 @@
 import UIKit
 
 class FaceViewController: UIViewController {
-
+    
     // Var/Let/ CP
     
-    var expression = FacialExpression(eyes: .Closed, eyeBrows: .Normal, mouth: .Grin) {
+    var expression = FacialExpression(eyes: .Open, eyeBrows: .Normal, mouth: .Grin) {
         didSet {
             updateUI()
         }
@@ -38,7 +38,7 @@ class FaceViewController: UIViewController {
             sadderGestureRecognizer.direction = .down
             faceView.addGestureRecognizer(sadderGestureRecognizer)
             
-             updateUI()
+            updateUI()
         }
     }
     
@@ -59,16 +59,19 @@ class FaceViewController: UIViewController {
     
     private func updateUI() {
         
-        switch expression.eyes {
+        if faceView != nil {
             
-        case .Open: faceView.eyeIsOpen = true
-        case . Closed: faceView.eyeIsOpen = false
-        case .Squinting: faceView.eyeIsOpen = false
+            switch expression.eyes {
+                
+            case .Open: faceView.eyeIsOpen = true
+            case . Closed: faceView.eyeIsOpen = false
+            case .Squinting: faceView.eyeIsOpen = false
+            }
+            
+            faceView.mouthCurvature = mouthCurvatures[expression.mouth] ?? 0.0
+            
+            faceView.eyeBrowTilt = eyeBrowTilts[expression.eyeBrows] ?? 0.0
         }
-        
-        faceView.mouthCurvature = mouthCurvatures[.Grin] ?? 0.0
-        
-        faceView.eyeBrowTilt = eyeBrowTilts[.Relaxed] ?? 0.0
     }
     
     // Gesture Functions
