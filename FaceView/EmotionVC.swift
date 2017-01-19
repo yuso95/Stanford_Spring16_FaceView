@@ -26,7 +26,7 @@ class EmotionVC: UIViewController {
             desctinationVC = navCon.visibleViewController!
         }
         
-        if let faceVC = desctinationVC as? FaceViewController {
+        if let faceVC = desctinationVC.contentVC as? FaceViewController {
             
             if let identifier = segue.identifier {
                 
@@ -42,5 +42,18 @@ class EmotionVC: UIViewController {
             }
         }
     }
+}
 
+extension UIViewController {
+    
+    var contentVC: UIViewController {
+        
+        if let navCon = self as? UINavigationController {
+            
+            return navCon.visibleViewController ?? self
+        } else {
+            
+            return self
+        }
+    }
 }

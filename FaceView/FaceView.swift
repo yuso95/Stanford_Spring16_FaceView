@@ -30,6 +30,10 @@ class FaceView: UIView {
             
             scale *= recognizer.scale
             recognizer.scale = 1.0
+            
+            // Working
+            self.transform = CGAffineTransform(scaleX: scale, y: scale)
+            
         default:
             break
         }
