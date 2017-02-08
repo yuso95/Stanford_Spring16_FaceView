@@ -10,6 +10,14 @@ import UIKit
 
 class FaceViewController: UIViewController {
     
+    // Mark: - Animation Constants
+    
+    private struct Animation {
+        
+        static let ShakeAngle = CGFloat(M_PI/6)
+        static let ShakeDuration = 0.5
+    }
+    
     // Var/Let/ CP
     
     var expression = FacialExpression(eyes: .Open, eyeBrows: .Normal, mouth: .Grin) {
@@ -24,7 +32,7 @@ class FaceViewController: UIViewController {
     
     // Outlets
     
-    @IBOutlet private weak var faceView: FaceView! {
+    @IBOutlet weak var faceView: FaceView! {
         didSet {
             
             
@@ -47,6 +55,35 @@ class FaceViewController: UIViewController {
     
     // Actions
     
+    @IBAction func headShake(_ sender: UITapGestureRecognizer) {
+        
+        UIView.animate(withDuration: Animation.ShakeDuration, animations: { 
+            
+            self.faceView.transform = CGAffineTransform(rotationAngle: Animation.ShakeAngle)
+        }) { finished in
+            if finished {
+                
+                UIView.animate(withDuration: Animation.ShakeDuration, animations: { 
+                    
+                    self.faceView.transform = CGAffineTransform(rotationAngle: -Animation.ShakeAngle * 2)
+                }, completion: { finished in
+                    if finished {
+                        
+                        UIView.animate(withDuration: Animation.ShakeDuration, animations: { 
+                            
+                            // Fix Here because it move way over on the right
+                            self.faceView.transform = CGAffineTransform(rotationAngle: Animation.ShakeAngle)
+                        }, completion: { finished in
+                            if finished {
+                                
+                                
+                            }
+                        })
+                    }
+                })
+            }
+        }
+    }
     @IBAction func toggleEyes(_ recongnizer: UITapGestureRecognizer) {
         
         if recongnizer.state == .ended {
