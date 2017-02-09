@@ -15,6 +15,7 @@ class FaceViewController: UIViewController {
     private struct Animation {
         
         static let ShakeAngle = CGFloat(M_PI/6)
+        static let ShakeEndAngle = CGFloat(0)
         static let ShakeDuration = 0.5
     }
     
@@ -72,7 +73,7 @@ class FaceViewController: UIViewController {
                         UIView.animate(withDuration: Animation.ShakeDuration, animations: { 
                             
                             // Fix Here because it move way over on the right
-                            self.faceView.transform = CGAffineTransform(rotationAngle: Animation.ShakeAngle)
+                            self.faceView.transform = CGAffineTransform(rotationAngle: Animation.ShakeEndAngle)
                         }, completion: { finished in
                             if finished {
                                 
@@ -84,6 +85,7 @@ class FaceViewController: UIViewController {
             }
         }
     }
+    
     @IBAction func toggleEyes(_ recongnizer: UITapGestureRecognizer) {
         
         if recongnizer.state == .ended {

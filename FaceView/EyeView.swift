@@ -9,7 +9,7 @@
 import UIKit
 
 class EyeView: UIView {
-
+    
     var lineWidth: CGFloat = 5.0 { didSet { setNeedsDisplay() }}
     var color: UIColor = UIColor.red { didSet { setNeedsDisplay() }}
     var _eyesOpen: Bool = true { didSet { setNeedsDisplay() }}
@@ -21,7 +21,7 @@ class EyeView: UIView {
         }
         set {
             
-            EyeView.transition(with: self, duration: 0.2, options: [.transitionFlipFromTop, .curveLinear], animations: { 
+            EyeView.transition(with: self, duration: 0.2, options: [.transitionFlipFromTop], animations: {
                 
                 self._eyesOpen = newValue
             }, completion: nil)
@@ -29,7 +29,7 @@ class EyeView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-
+        
         var path: UIBezierPath!
         
         if eyeOpen {
@@ -46,5 +46,5 @@ class EyeView: UIView {
         color.setStroke()
         path.stroke()
     }
-
+    
 }
