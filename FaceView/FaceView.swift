@@ -99,7 +99,9 @@ class FaceView: UIView {
         eye.isOpaque = false
         eye.color = color
         eye.lineWidth = lineWidth
+        
         self.addSubview(eye)
+        
         return eye
     }
     

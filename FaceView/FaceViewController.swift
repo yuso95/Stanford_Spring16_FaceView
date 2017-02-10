@@ -72,7 +72,6 @@ class FaceViewController: UIViewController {
                         
                         UIView.animate(withDuration: Animation.ShakeDuration, animations: { 
                             
-                            // Fix Here because it move way over on the right
                             self.faceView.transform = CGAffineTransform(rotationAngle: Animation.ShakeEndAngle)
                         }, completion: { finished in
                             if finished {
